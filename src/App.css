@@ -28,6 +28,21 @@
   color: #61dafb;
 }
 
+/* ====== Home Page =========*/
+#home-page .logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 250px;
+}
+
+#home-page .text {
+ text-align: center;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
