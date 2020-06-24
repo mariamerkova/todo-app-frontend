@@ -14,7 +14,7 @@ const SignupSchema = Yup.object().shape({
         .required('Required'),
 });
 
-const LoginComponent = () => (
+const LoginComponent = (props) => (
     <div>
         <h1 className="signUp">Signup</h1>
         <Formik
@@ -45,7 +45,7 @@ const LoginComponent = () => (
                             <div><small className="text-danger">{errors.password}</small></div>
                         ) : null}
                         </div>
-                        <Button variant="outline-primary">You haven't account yet?</Button>
+                        <Button variant="outline-primary" onClick={() => props.onRegisterClick() }>You haven't account yet?</Button>
                         <Button variant="outline-primary" type="submit">Login</Button>
                     </Form>
                 </div>

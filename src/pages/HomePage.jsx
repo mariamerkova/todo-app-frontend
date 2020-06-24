@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 function HomePage(props) {
 
     const loginPage = () => {
-        props.history.push("/loginPage")
+        props.history.push("/login")
     }
 
     return <>
