@@ -41,6 +41,38 @@
  text-align: center;
 }
 
+/* ====== Login Page =========*/
+#login-page .logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 250px;
+}
+
+#login-page .fields {
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+}
+
+#login-page .Button {
+  margin-right: 100px;
+  padding: 100px;
+}
+
+#login-component {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.signUp {
+  text-align: center;
+}
+
+
+
 
 
 @keyframes App-logo-spin {
