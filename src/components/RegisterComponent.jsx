@@ -2,6 +2,7 @@ import React from "react";
 import {Formik, Form, Field} from "formik";
 import {Button} from "react-bootstrap";
 import * as Yup from 'yup';
+import AuthenticationApi from '../api/AuthenticationApi';
 
 const SignupSchema = Yup.object().shape({
     username: Yup.string()
@@ -33,7 +34,14 @@ const RegisterComponent = (props) => (
             }}
             validationSchema={SignupSchema}
             onSubmit={values => {
-                console.log(values);
+                AuthenticationApi.registerUser(values.username, values.password)
+                    .then((reponse) => {
+                        alert("User is successfully registered");
+                        props.onBackClick();
+                    })
+                    .catch((error) =>{
+
+                    });
             }}
         >
             {({errors, touched}) => (
