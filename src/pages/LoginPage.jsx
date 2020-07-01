@@ -23,8 +23,13 @@ class LoginPage extends Component {
                 </Row>
                 <Row>
                     <Col className="text-center">
-                        {this.state.showLogin && <LoginComponent onRegisterClick={() => this.setState({ showLogin: false, showRegister: true })}/> }
-                        {this.state.showRegister && <RegisterComponent onBackClick={() => this.setState({ showLogin: true, showRegister: false })}/> }
+                        {this.state.showLogin && <LoginComponent
+                            history={this.props.history}
+                            onRegisterClick={() => this.setState({ showLogin: false, showRegister: true })}
+                        /> }
+                        {this.state.showRegister && <RegisterComponent
+                            onBackClick={() => this.setState({ showLogin: true, showRegister: false })}
+                        /> }
                     </Col>
                 </Row>
             </Container>
