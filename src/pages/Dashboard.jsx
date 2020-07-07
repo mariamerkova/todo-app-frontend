@@ -1,6 +1,9 @@
 import React from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
+import TaskListContainer from "../components/TaskListContainer";
+import TaskListComponent from "../components/TaskListComponent";
+
 
 function Dashboard(props) {
     return (
@@ -20,8 +23,8 @@ function Dashboard(props) {
                 </Col>
             </Row>
             <Row>
-                <Col className="colLeft" sm={2}>mimi</Col>
-                <Col className="colRight" sm={10}>mimi</Col>
+                <Col className="colLeft" sm={2}><TaskListContainer match={props.match}/></Col>
+                <Col className="colRight" sm={10}></Col>
             </Row>
         </Container>
     )

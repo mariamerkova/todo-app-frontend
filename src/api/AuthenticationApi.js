@@ -13,7 +13,9 @@ class AuthenticationApi {
             headers: {
                 authorization: this.createBasicAUnthToken(username,password),
                 'Content-Type': 'application/json'
-            }})
+            }}).then(() => {
+                this.setupAxiosInterceptors(this.createBasicAUnthToken(username,password));
+        })
     }
 
     createBasicAUnthToken(username, password) {
@@ -22,6 +24,17 @@ class AuthenticationApi {
 
     registerSuccessfulLogin(username,password) {
         sessionStorage.setItem('authenticatedUser', username);
+    }
+
+    setupAxiosInterceptors(basicAuthHeader) {
+
+
+        axios.interceptors.request.use(
+            (config) => {
+                config.headers.authorization = basicAuthHeader;
+                return config
+            }
+        )
     }
 
 }
