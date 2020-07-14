@@ -1,11 +1,12 @@
 import React from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import TaskListContainer from "../components/TaskListContainer";
-import TaskListComponent from "../components/TaskListComponent";
+import AuthenticationApi from "../api/AuthenticationApi";
 
 
 function Dashboard(props) {
+
     return (
         <Container fluid>
             <Row>
@@ -21,6 +22,10 @@ function Dashboard(props) {
                         <Navbar.Brand>Hello</Navbar.Brand>
                     </Navbar>
                 </Col>
+                <Button variant="outline-primary" size="sm" onClick={() => {
+                    AuthenticationApi.logout();
+                    props.history.push(`/`);
+                }}>Logout</Button>
             </Row>
             <Row>
                 <Col className="colLeft" sm={2}><TaskListContainer match={props.match}/></Col>

@@ -41,6 +41,10 @@ class AuthenticationApi {
         )
     }
 
+    logout() {
+        cookies.remove('authorization');
+    }
+
 }
 
 export default new AuthenticationApi();
