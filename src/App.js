@@ -5,8 +5,21 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
+import Cookies from 'universal-cookie';
+import AuthenticationApi from './api/AuthenticationApi';
+
+const cookies = new Cookies();
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+
+        const myCookie = cookies.get('authorization');
+        if(myCookie !== undefined) {
+            AuthenticationApi.setupAxiosInterceptors(myCookie);
+        }
+    }
+
   render() {
     return(
         <div>
