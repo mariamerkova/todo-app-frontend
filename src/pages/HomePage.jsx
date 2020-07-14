@@ -1,10 +1,18 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 function HomePage(props) {
 
     const loginPage = () => {
         props.history.push("/login")
+    }
+
+    const authorizationUsernameCookie =  cookies.get('authorizationUsername');
+    if(authorizationUsernameCookie !== undefined) {
+        props.history.push(`/dashboard/${authorizationUsernameCookie}`);
     }
 
     return <>

@@ -18,6 +18,7 @@ class AuthenticationApi {
                 'Content-Type': 'application/json'
             }}).then(() => {
                 cookies.set('authorization',this.createBasicAUnthToken(username,password), { path: '/' });
+                cookies.set('authorizationUsername',username, { path: '/' });
                 this.setupAxiosInterceptors(this.createBasicAUnthToken(username,password));
         })
     }

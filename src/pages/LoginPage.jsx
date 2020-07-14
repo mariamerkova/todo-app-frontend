@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import LoginComponent from "../components/LoginComponent";
 import {Col, Container, Row} from "react-bootstrap";
 import RegisterComponent from "../components/RegisterComponent";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 class LoginPage extends Component {
     constructor(props) {
@@ -11,6 +14,13 @@ class LoginPage extends Component {
             showLogin: true,
             showRegister: false
         };
+    }
+
+    componentDidMount() {
+        const authorizationUsernameCookie =  cookies.get('authorizationUsername');
+        if(authorizationUsernameCookie !== undefined) {
+            this.props.history.push(`/dashboard/${authorizationUsernameCookie}`);
+        }
     }
 
     render() {
