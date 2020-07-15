@@ -9,8 +9,8 @@ class TodoListApi {
         return axios.get(`http://localhost:8080/todo-list/owned-to/${username}`)
     }
 
-    saveTodoList() {
-        return axios.post(`http://localhost:8080/todo-list/`)
+    saveTodoList(todoList) {
+        return axios.post(`http://localhost:8080/todo-list/`, todoList)
     }
 
     deleteTodoList(id) {
