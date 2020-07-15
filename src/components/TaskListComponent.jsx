@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 function TaskListComponent({todoList}) {
     return(
-            <div>
+        <article className="task-list">
+            <div className="title">
                 {todoList.name}
             </div>
+        </article>
         )
 
 
