@@ -11,13 +11,41 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            todoList: null
+            todoList: null,
+            todoListCollection: []
         }
+    }
+
+    componentDidMount() {
+        this.fetchTodoLists();
     }
 
     loadTaskList = (id) => {
         TodoListApi.getSingleTodoList(id)
             .then(response => this.setState({todoList : response.data}));
+    }
+
+    onDelete = (id) => {
+        TodoListApi.deleteTodoList(id);
+        this.setState({todoList: null})
+        this.fetchTodoLists();
+    }
+
+    fetchTodoLists = () => {
+        TodoListApi.getAllTodosLists(this.props.match.params.username)
+            .then((response) => {
+                this.setState({
+                    todoListCollection: response.data
+                })
+            })
+    }
+
+    addNewTodoList = () => {
+        const todoList = {
+            name : 'Untitled List'
+        }
+        TodoListApi.saveTodoList(todoList);
+        this.fetchTodoLists();
     }
 
     render() {
@@ -43,10 +71,10 @@ class Dashboard extends Component {
                 </Row>
                 <Row>
                     <Col className="colLeft" sm={2}>
-                        <TaskListContainer match={this.props.match} onClickList={this.loadTaskList}/>
+                        <TaskListContainer todoList={this.state.todoListCollection} onAddNewTodoList={this.addNewTodoList} onClickList={this.loadTaskList}/>
                     </Col>
                     <Col className="colRight" sm={10}>
-                        {this.state.todoList !== null ? <TaskListComponent todoList={this.state.todoList} /> : ""}
+                        {this.state.todoList !== null ? <TaskListComponent todoList={this.state.todoList} onDelete={(id) => this.onDelete(id)}/> : ""}
                     </Col>
                 </Row>
             </Container>
