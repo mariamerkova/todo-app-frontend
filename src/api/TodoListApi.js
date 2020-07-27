@@ -17,8 +17,8 @@ class TodoListApi {
         return axios.delete(`http://localhost:8080/todo-list/${id}`)
     }
 
-    updateTodoList() {
-        return axios.put(`http://localhost:8080/todo-list/`)
+    updateTodoList(id, todoList) {
+        return axios.put(`http://localhost:8080/todo-list/${id}`, todoList)
     }
 }
 

@@ -31,6 +31,12 @@ class Dashboard extends Component {
         this.fetchTodoLists();
     }
 
+    onUpdate = (id) => {
+        TodoListApi.updateTodoList(id, this.state.todoList);
+        this.fetchTodoLists();
+
+    }
+
     fetchTodoLists = () => {
         TodoListApi.getAllTodosLists(this.props.match.params.username)
             .then((response) => {
@@ -46,6 +52,12 @@ class Dashboard extends Component {
         }
         TodoListApi.saveTodoList(todoList);
         this.fetchTodoLists();
+    }
+
+    handleInputChange = (e) => {
+        const todoList = Object.assign({}, this.state.todoList);
+        todoList.name = e.target.value;
+        this.setState({todoList});
     }
 
     render() {
@@ -71,10 +83,23 @@ class Dashboard extends Component {
                 </Row>
                 <Row>
                     <Col className="colLeft" sm={2}>
-                        <TaskListContainer todoList={this.state.todoListCollection} onAddNewTodoList={this.addNewTodoList} onClickList={this.loadTaskList}/>
+                        <TaskListContainer
+                            todoList={this.state.todoListCollection}
+                            onAddNewTodoList={this.addNewTodoList}
+                            onClickList={this.loadTaskList}
+                        />
                     </Col>
                     <Col className="colRight" sm={10}>
-                        {this.state.todoList !== null ? <TaskListComponent todoList={this.state.todoList} onDelete={(id) => this.onDelete(id)}/> : ""}
+                        {this.state.todoList !== null ?
+                            <TaskListComponent
+                                todoList={this.state.todoList}
+                                onDelete={(id) => this.onDelete(id)}
+                                handleInputChange={(e) => this.handleInputChange(e)}
+                                onUpdate={(id) => this.onUpdate(id)}
+                            />
+                            :
+                            ""
+                        }
                     </Col>
                 </Row>
             </Container>
