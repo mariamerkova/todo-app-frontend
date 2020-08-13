@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {Button} from "react-bootstrap";
 import {Formik, Form, Field} from 'formik';
+import Task from "./Task";
 
 function validateRequired(value) {
     let error;
@@ -11,12 +12,12 @@ function validateRequired(value) {
     return error;
 }
 
-function TaskListComponent({todoList, onDelete, handleInputChange, onUpdate}) {
+function TaskListComponent({todoList, onDelete, handleInputChange, onUpdate, tasks }) {
     return (
         <article className="task-list">
             <Formik
                 initialValues={{
-                    name: todoList.name
+                    name: todoList.name,
                 }}
                 onSubmit={values => {
                     onUpdate(todoList.id)
@@ -32,9 +33,13 @@ function TaskListComponent({todoList, onDelete, handleInputChange, onUpdate}) {
                                 if (window.confirm('Are you sure you want to delete this item?')) onDelete(todoList.id)
                             }}>Delete</Button>
                         </div>
+                        <div className="tasks">
+                            {tasks.map(task => <Task task={task} />)}
+                        </div>
                         <div>
                             <Button variant="info" size="sm" className="save-button" type="submit">Save</Button>
                         </div>
+
                     </Form>
                 )}
             </Formik>
@@ -50,6 +55,7 @@ TaskListComponent.propTypes = {
     todoList: PropTypes.object.isRequired,
     onDelete: PropTypes.func.isRequired,
     handleInputChange: PropTypes.func.isRequired,
-    onUpdate: PropTypes.func.isRequired
+    onUpdate: PropTypes.func.isRequired,
+    tasks: PropTypes.instanceOf(Task)
 
 };

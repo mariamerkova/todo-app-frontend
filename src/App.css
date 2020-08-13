@@ -118,7 +118,25 @@
 input {
   background-color: peachpuff;
 }
+.tasks .task {
+  border-bottom: 1px solid #6e96b5;
+  padding: 4px;
+  margin: 4px;
+}
 
+.tasks {
+  margin: 10px;
+  margin-bottom: 60px;
+}
+
+.icon-curcle {
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.description {
+  padding-left: 40px;
+}
 
 
 

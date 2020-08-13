@@ -12,7 +12,9 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             todoList: null,
-            todoListCollection: []
+            todoListCollection: [],
+            tasks: []
+
         }
     }
 
@@ -23,6 +25,7 @@ class Dashboard extends Component {
     loadTaskList = (id) => {
         TodoListApi.getSingleTodoList(id)
             .then(response => this.setState({todoList : response.data}));
+        this.fetchTasks(id);
     }
 
     onDelete = (id) => {
@@ -44,6 +47,15 @@ class Dashboard extends Component {
                     todoListCollection: response.data
                 })
             })
+    }
+
+    fetchTasks = (id) => {
+        TodoListApi.fetchTasksFromTodoList(id, this.state.tasks)
+            .then((response) => {
+            this.setState( {
+                tasks: response.data
+            })
+        })
     }
 
     addNewTodoList = () => {
@@ -96,6 +108,7 @@ class Dashboard extends Component {
                                 onDelete={(id) => this.onDelete(id)}
                                 handleInputChange={(e) => this.handleInputChange(e)}
                                 onUpdate={(id) => this.onUpdate(id)}
+                                tasks={this.state.tasks}
                             />
                             :
                             ""

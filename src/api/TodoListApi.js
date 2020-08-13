@@ -20,6 +20,10 @@ class TodoListApi {
     updateTodoList(id, todoList) {
         return axios.put(`http://localhost:8080/todo-list/${id}`, todoList)
     }
+
+    fetchTasksFromTodoList(id) {
+        return axios.get(`http://localhost:8080/todo-list/${id}/tasks`)
+    }
 }
 
 export default new TodoListApi();
